@@ -1,0 +1,4 @@
+- name: Run race updater
+  run: python updateAllRacesOnline.py
+  env:
+    GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
