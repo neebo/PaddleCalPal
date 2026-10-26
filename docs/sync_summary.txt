@@ -1,0 +1,5 @@
+Sheet '2025': 11 added, 0 refreshed
+!! calendar: Can't reach the calendar. Share 'California Paddle Races' with the service account (pythonsheet@races-sheets.iam.gserviceaccount.com) using 'Make changes to events', and make sure the Google Calendar API is enabled in its Google Cloud project. (403: {
+  "error": {
+    "code": 403,
+    "message": "Google Calendar API has not been used in project 788427851095 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis)
