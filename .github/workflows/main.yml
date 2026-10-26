@@ -27,6 +27,15 @@ jobs:
       - name: Scrape PaddleGuru
         run: python paddleguru_ca.py
 
+      - name: Update Google Sheet and Calendar
+        id: sync
+        continue-on-error: true
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: |
+          set -o pipefail
+          python sync_google.py 2>&1 | tee docs/sync_summary.txt
+
       - name: Upload debug pages
         if: always()
         uses: actions/upload-artifact@v4
@@ -47,3 +56,9 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
           fi
+
+      - name: Flag sync problems
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "Google Sheet/Calendar sync failed — see docs/sync_summary.txt"
+          exit 1
