@@ -44,5 +44,6 @@ jobs:
             echo "No changes"
           else
             git commit -m "Update California OC/surfski races from PaddleGuru"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
           fi
