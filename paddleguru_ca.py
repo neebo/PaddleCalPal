@@ -20,7 +20,6 @@ from dataclasses import asdict, dataclass, field
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from dateutil import parser as dateparser
 
 ROOT = "https://paddleguru.com"
 LIST_URL = f"{ROOT}/races?search=&sport=all"
@@ -32,9 +31,13 @@ CRAFT_PAT = re.compile(
     r"surf\s*-?\s*ski|outrigger|\bva['’]?a\b|\bOC\s*-?\s*[126]\b|\bV\s*-?\s*[16]\b",
     re.I,
 )
-MONTHS = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?"
+MONTH_NUM = {m: i for i, m in enumerate(
+    ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+# Month names must be capitalized ("May 5", not "may"); the year is optional because
+# PaddleGuru race cards usually show just "November 15" or "November 07 - November 08, 2026".
 DATE_PAT = re.compile(
-    rf"(?:(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+)?{MONTHS}\s+\d{{1,2}}(?:st|nd|rd|th)?,?\s+20\d\d",
+    r"\b(?P<mon>Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(?:[a-z]*)\.?\s+"
+    r"(?P<day>\d{1,2})(?:st|nd|rd|th)?\b(?:,?\s+(?P<year>20\d\d))?",
     re.I,
 )
 RACE_HREF = re.compile(r"^/races/[^/?#]+/?$")
@@ -60,18 +63,43 @@ class Race:
 
 # ---------- text parsing helpers (pure, unit-testable) ----------
 
-def find_date(text: str, today: date | None = None) -> date | None:
-    """Return the earliest date found in the text that is today or later."""
+def find_date(text: str, today: date | None = None, year_hint: int | None = None) -> date | None:
+    """Earliest upcoming date in the text.
+
+    Dates without a year take the year that follows them in a range
+    ("November 07 - November 08, 2026"), else the year in the race name
+    (year_hint), else their next occurrence from today.
+    """
     today = today or date.today()
     found = []
     for m in DATE_PAT.finditer(text):
-        raw = re.sub(r"(\d)(st|nd|rd|th)", r"\1", m.group(0))
-        try:
-            found.append(dateparser.parse(raw, fuzzy=True).date())
-        except (ValueError, OverflowError):
+        if not m.group("mon")[0].isupper():
             continue
+        mon = MONTH_NUM[m.group("mon")[:3].lower()]
+        day = int(m.group("day"))
+        year = m.group("year")
+        if not year:
+            ahead = re.match(r"[^\n]{0,30}?\b(20\d\d)\b", text[m.end():])
+            year = ahead.group(1) if ahead else None
+        try:
+            if year:
+                d = date(int(year), mon, day)
+            elif year_hint:
+                d = date(year_hint, mon, day)
+            else:
+                d = date(today.year, mon, day)
+                if d < today:
+                    d = date(today.year + 1, mon, day)
+        except ValueError:
+            continue
+        found.append(d)
     upcoming = sorted(d for d in found if d >= today)
     return upcoming[0] if upcoming else None
+
+
+def year_in(name: str) -> int | None:
+    m = re.search(r"\b(20\d\d)\b", name)
+    return int(m.group(1)) if m else None
 
 
 def find_crafts(text: str) -> list[str]:
@@ -225,7 +253,8 @@ def scrape() -> list[Race]:
             full = "\n".join(texts)
 
             name = c["title"] or (page.title().split("|")[0].strip() if page else c["href"])
-            d = find_date(card_text) or find_date(full)
+            hint = year_in(name)
+            d = find_date(card_text, year_hint=hint) or find_date(full, year_hint=hint)
             race = Race(
                 name=name.splitlines()[0][:120],
                 url=url,
