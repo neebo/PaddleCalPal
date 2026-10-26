@@ -1,0 +1,51 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//PaddleCalPal//PaddleGuru California OC+Surfski//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:PaddleGuru – California OC & Surfski
+X-WR-TIMEZONE:America/Los_Angeles
+BEGIN:VEVENT
+UID:cb1f707f4175f88d@paddlecalpal
+DTSTAMP:20261026T205025Z
+DTSTART;VALUE=DATE:20261114
+DTEND;VALUE=DATE:20261115
+SUMMARY:Green Buoy Battle 2026
+LOCATION:Dana Point\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/GreenBuoyBattle2026
+URL:https://paddleguru.com/races/GreenBuoyBattle2026
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e1f610c4d293d369@paddlecalpal
+DTSTAMP:20261026T205025Z
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:Hanohano Ocean Challenge 2027
+LOCATION:San Diego\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/HanohanoOceanChallenge2027
+URL:https://paddleguru.com/races/HanohanoOceanChallenge2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:193b8f4205969b4c@paddlecalpal
+DTSTAMP:20261026T205025Z
+DTSTART;VALUE=DATE:20270514
+DTEND;VALUE=DATE:20270515
+SUMMARY:California River Quest 2027
+LOCATION:Redding\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/CaliforniaRiverQuest2027
+URL:https://paddleguru.com/races/CaliforniaRiverQuest2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:22642562dcbc2ad1@paddlecalpal
+DTSTAMP:20261026T205025Z
+DTSTART;VALUE=DATE:20271007
+DTEND;VALUE=DATE:20271008
+SUMMARY:Payton test race 2027
+LOCATION:San Diego\, CA
+DESCRIPTION:Classes: surfski\nRegister/details: https://paddleguru.com/races/Paytontestrace2027
+URL:https://paddleguru.com/races/Paytontestrace2027
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

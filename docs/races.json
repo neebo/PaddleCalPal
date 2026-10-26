@@ -1,0 +1,50 @@
+{
+  "source": "https://paddleguru.com/races?search=&sport=all",
+  "generated_at": "2026-10-26T20:50:25+00:00",
+  "filter": "California, upcoming, outrigger (OC/V1) or surfski classes",
+  "races": [
+    {
+      "name": "Green Buoy Battle 2026",
+      "url": "https://paddleguru.com/races/GreenBuoyBattle2026",
+      "date": "2026-11-14",
+      "location": "Dana Point, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Hanohano Ocean Challenge 2027",
+      "url": "https://paddleguru.com/races/HanohanoOceanChallenge2027",
+      "date": "2027-01-30",
+      "location": "San Diego, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "California River Quest 2027",
+      "url": "https://paddleguru.com/races/CaliforniaRiverQuest2027",
+      "date": "2027-05-14",
+      "location": "Redding, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Payton test race 2027",
+      "url": "https://paddleguru.com/races/Paytontestrace2027",
+      "date": "2027-10-07",
+      "location": "San Diego, CA",
+      "crafts": [
+        "surfski"
+      ],
+      "california": true
+    }
+  ]
+}
