@@ -1,6 +1,6 @@
 {
   "source": "https://paddleguru.com/races?search=&sport=all",
-  "generated_at": "2026-10-26T21:06:57+00:00",
+  "generated_at": "2026-10-26T21:09:28+00:00",
   "filter": "California, upcoming, outrigger (OC/V1) or surfski classes",
   "races": [
     {
@@ -8,6 +8,49 @@
       "url": "https://paddleguru.com/races/GreenBuoyBattle2026",
       "date": "2026-11-14",
       "location": "Dana Point, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Redwood Water Sports November Paddle Race 2026",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsNovemberPaddleRace2026",
+      "date": "2026-11-15",
+      "location": "Redwood City, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Becky Stuart Race , Oceanside, San Diego, California 2026",
+      "url": "https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026",
+      "date": "2026-12-05",
+      "location": "San Diego, CA",
+      "crafts": [
+        "outrigger"
+      ],
+      "california": true
+    },
+    {
+      "name": "Redwood Water Sports December Paddle Race 2026",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsDecemberPaddleRace2026",
+      "date": "2026-12-13",
+      "location": "Redwood City, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Redwood Water Sports January Paddle Race 2027",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsJanuaryPaddleRace2027",
+      "date": "2027-01-10",
+      "location": "Redwood City, CA",
       "crafts": [
         "outrigger",
         "surfski"
@@ -26,9 +69,53 @@
       "california": true
     },
     {
+      "name": "Redwood Water Sports February Paddle Race 2027",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsFebruaryPaddleRace2027",
+      "date": "2027-02-07",
+      "location": "Redwood City, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Redwood Water Sports March Paddle Race 2027",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsMarchPaddleRace2027",
+      "date": "2027-03-07",
+      "location": "Redwood City, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Redwood Water Sports April Paddle Race 2027",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsAprilPaddleRace2027",
+      "date": "2027-04-18",
+      "location": "Redwood City, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
+      "name": "Redwood Water Sports May Paddle Race 2027",
+      "url": "https://paddleguru.com/races/RedwoodWaterSportsMayPaddleRace2027",
+      "date": "2027-05-16",
+      "location": "Redwood City, CA",
+      "crafts": [
+        "outrigger",
+        "surfski"
+      ],
+      "california": true
+    },
+    {
       "name": "California River Quest 2027",
       "url": "https://paddleguru.com/races/CaliforniaRiverQuest2027",
-      "date": "2027-05-14",
+      "date": "2027-05-30",
       "location": "Redding, CA",
       "crafts": [
         "outrigger",

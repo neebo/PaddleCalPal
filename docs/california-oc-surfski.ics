@@ -6,7 +6,7 @@ X-WR-CALNAME:PaddleGuru – California OC & Surfski
 X-WR-TIMEZONE:America/Los_Angeles
 BEGIN:VEVENT
 UID:cb1f707f4175f88d@paddlecalpal
-DTSTAMP:20261026T210657Z
+DTSTAMP:20261026T210928Z
 DTSTART;VALUE=DATE:20261114
 DTEND;VALUE=DATE:20261115
 SUMMARY:Green Buoy Battle 2026
@@ -16,8 +16,52 @@ URL:https://paddleguru.com/races/GreenBuoyBattle2026
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:a23122f25036a480@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:Redwood Water Sports November Paddle Race 2026
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsNovemberPaddleRace2026
+URL:https://paddleguru.com/races/RedwoodWaterSportsNovemberPaddleRace2026
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:558c0a68fd4067b1@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:Becky Stuart Race \, Oceanside\, San Diego\, California 2026
+LOCATION:San Diego\, CA
+DESCRIPTION:Classes: outrigger\nRegister/details: https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026
+URL:https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dd6ca753eb6cf013@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20261213
+DTEND;VALUE=DATE:20261214
+SUMMARY:Redwood Water Sports December Paddle Race 2026
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsDecemberPaddleRace2026
+URL:https://paddleguru.com/races/RedwoodWaterSportsDecemberPaddleRace2026
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d99e547d436012c5@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20270110
+DTEND;VALUE=DATE:20270111
+SUMMARY:Redwood Water Sports January Paddle Race 2027
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsJanuaryPaddleRace2027
+URL:https://paddleguru.com/races/RedwoodWaterSportsJanuaryPaddleRace2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:e1f610c4d293d369@paddlecalpal
-DTSTAMP:20261026T210657Z
+DTSTAMP:20261026T210928Z
 DTSTART;VALUE=DATE:20270130
 DTEND;VALUE=DATE:20270131
 SUMMARY:Hanohano Ocean Challenge 2027
@@ -27,10 +71,54 @@ URL:https://paddleguru.com/races/HanohanoOceanChallenge2027
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:91adf0bcf104469c@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20270207
+DTEND;VALUE=DATE:20270208
+SUMMARY:Redwood Water Sports February Paddle Race 2027
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsFebruaryPaddleRace2027
+URL:https://paddleguru.com/races/RedwoodWaterSportsFebruaryPaddleRace2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c574b0b0de155f8e@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20270307
+DTEND;VALUE=DATE:20270308
+SUMMARY:Redwood Water Sports March Paddle Race 2027
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsMarchPaddleRace2027
+URL:https://paddleguru.com/races/RedwoodWaterSportsMarchPaddleRace2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:70fdb659e67abf3f@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+SUMMARY:Redwood Water Sports April Paddle Race 2027
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsAprilPaddleRace2027
+URL:https://paddleguru.com/races/RedwoodWaterSportsAprilPaddleRace2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ea8f1af13436a14b@paddlecalpal
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270517
+SUMMARY:Redwood Water Sports May Paddle Race 2027
+LOCATION:Redwood City\, CA
+DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/RedwoodWaterSportsMayPaddleRace2027
+URL:https://paddleguru.com/races/RedwoodWaterSportsMayPaddleRace2027
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:193b8f4205969b4c@paddlecalpal
-DTSTAMP:20261026T210657Z
-DTSTART;VALUE=DATE:20270514
-DTEND;VALUE=DATE:20270515
+DTSTAMP:20261026T210928Z
+DTSTART;VALUE=DATE:20270530
+DTEND;VALUE=DATE:20270531
 SUMMARY:California River Quest 2027
 LOCATION:Redding\, CA
 DESCRIPTION:Classes: outrigger\, surfski\nRegister/details: https://paddleguru.com/races/CaliforniaRiverQuest2027
