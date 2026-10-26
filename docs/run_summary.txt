@@ -1,34 +1,34 @@
 List page: 33 race links found
-  [skip: no OC/surfski class] 2026-12-31 SDCKT Team Membership October-December 2026 | San Diego, CA | [] | https://paddleguru.com/races/SDCKTTeamMembershipOctoberDecember2026
+  [skip: no small-craft class (OC1/OC2/V1/surfski)] 2026-12-31 SDCKT Team Membership October-December 2026 | San Diego, CA | [] | https://paddleguru.com/races/SDCKTTeamMembershipOctoberDecember2026
   [not CA] The Bridges of Essex County 2026 / Pope's Landing Marina, Danvers, MA / November 1 / The Bridges of Essex Coun
   [skip: not CA] 2026-11-07 Tarzan Paddle Race 2026 | None | ['surfski'] | https://paddleguru.com/races/TarzanPaddleRace2026
   [not CA] NISH OUTRIGGER CHALLENGE MIAMI 2026 / 4020 Virginia Beach Dr, Miami, FL 33149 / November 07 - November 08, 202
-  [skip: not CA, no OC/surfski class] 2026-11-07 Marina Park Fall Nationals Prone Paddleboard Race | None | [] | https://paddleguru.com/races/MarinaParkFallNationalsPronePaddleboardRace
-  [KEEP] 2026-11-14 Green Buoy Battle 2026 | Dana Point, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/GreenBuoyBattle2026
-  [KEEP] 2026-11-15 Redwood Water Sports November Paddle Race 2026 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsNovemberPaddleRace2026
-  [skip: not CA, no OC/surfski class] 2026-11-21 Crossing Adventure Series: Marco Island "Conquer the Rock" | None | [] | https://paddleguru.com/races/CrossingAdventureSeriesMarcoIslandConquertheRock
+  [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2026-11-07 Marina Park Fall Nationals Prone Paddleboard Race | None | [] | https://paddleguru.com/races/MarinaParkFallNationalsPronePaddleboardRace
+  [KEEP] 2026-11-14 Green Buoy Battle 2026 | Dana Point, CA | ['OC1', 'V1', 'surfski'] | https://paddleguru.com/races/GreenBuoyBattle2026
+  [KEEP] 2026-11-15 Redwood Water Sports November Paddle Race 2026 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsNovemberPaddleRace2026
+  [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2026-11-21 Crossing Adventure Series: Marco Island "Conquer the Rock" | None | [] | https://paddleguru.com/races/CrossingAdventureSeriesMarcoIslandConquertheRock
   [not CA] Panama Jack Paddle Classic 2026 / Panama City, FL 32405, USA / November 21 / Please join us at St Andrews Stat
   [not CA] 52nd Annual FCPA Silver River Race / 9564 NE 28th Ln, Silver Springs, FL 34488, USA / December 5 / Come join t
-  [KEEP] 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026 | San Diego, CA | ['outrigger'] | https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026
-  [KEEP] 2026-12-13 Redwood Water Sports December Paddle Race 2026 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsDecemberPaddleRace2026
-  [KEEP] 2027-01-10 Redwood Water Sports January Paddle Race 2027 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsJanuaryPaddleRace2027
-  [KEEP] 2027-01-30 Hanohano Ocean Challenge 2027 | San Diego, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/HanohanoOceanChallenge2027
-  [KEEP] 2027-02-07 Redwood Water Sports February Paddle Race 2027 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsFebruaryPaddleRace2027
+  [skip: no small-craft class (OC1/OC2/V1/surfski)] 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026 | San Diego, CA | [] | https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026
+  [KEEP] 2026-12-13 Redwood Water Sports December Paddle Race 2026 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsDecemberPaddleRace2026
+  [KEEP] 2027-01-10 Redwood Water Sports January Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsJanuaryPaddleRace2027
+  [KEEP] 2027-01-30 Hanohano Ocean Challenge 2027 | San Diego, CA | ['OC1', 'OC2', 'V1', 'surfski'] | https://paddleguru.com/races/HanohanoOceanChallenge2027
+  [KEEP] 2027-02-07 Redwood Water Sports February Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsFebruaryPaddleRace2027
   [not CA] 4th Annual Super Chill Paddle 'n Plunge 2027 / 571 Stutts Road, Mooresville, NC, USA / February 13 / ALOHA PAD
   [not CA] Treasure Coast Paddle Battle 2027 / Fort Pierce, FL, USA / March 6 / This race features a 10k course, which st
-  [KEEP] 2027-03-07 Redwood Water Sports March Paddle Race 2027 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsMarchPaddleRace2027
-  [skip: not CA] 2027-03-07 Florida State Outrigger Regatta 2027 | None | ['outrigger'] | https://paddleguru.com/races/FloridaStateOutriggerRegatta2027
-  [KEEP] 2027-04-18 Redwood Water Sports April Paddle Race 2027 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsAprilPaddleRace2027
-  [skip: not CA] 2027-05-15 6th Annual Navarre Paddle Classic 2027 | None | ['outrigger', 'surfski'] | https://paddleguru.com/races/6thAnnualNavarrePaddleClassic2027
+  [KEEP] 2027-03-07 Redwood Water Sports March Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsMarchPaddleRace2027
+  [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2027-03-07 Florida State Outrigger Regatta 2027 | None | ['OC6'] | https://paddleguru.com/races/FloridaStateOutriggerRegatta2027
+  [KEEP] 2027-04-18 Redwood Water Sports April Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsAprilPaddleRace2027
+  [skip: not CA] 2027-05-15 6th Annual Navarre Paddle Classic 2027 | None | ['OC2'] | https://paddleguru.com/races/6thAnnualNavarrePaddleClassic2027
   [not CA] Thief Neck Island Paddle Quest DUO 2027 / Rockwood Marina & RV Resort 1500 Pumphouse Rd Rockwood, TN 37854 / M
-  [KEEP] 2027-05-16 Redwood Water Sports May Paddle Race 2027 | Redwood City, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/RedwoodWaterSportsMayPaddleRace2027
+  [KEEP] 2027-05-16 Redwood Water Sports May Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsMayPaddleRace2027
   [not CA] Suwannee River 230 2027 / Griffis Fish Camp, 10257 GA-177, Fargo, GA 31631 / May 22 - May 26, 2027 / The 12th 
-  [KEEP] 2027-05-30 California River Quest 2027 | Redding, CA | ['outrigger', 'surfski'] | https://paddleguru.com/races/CaliforniaRiverQuest2027
-  [skip: no OC/surfski class] 2027-06-01 SplashCo's 2027 Jailbreak Paddle Marathon | Rancho Cordova, CA | [] | https://paddleguru.com/races/SplashCos2027JailbreakPaddleMarathon
+  [KEEP] 2027-05-30 California River Quest 2027 | Redding, CA | ['OC1', 'OC2', 'surfski'] | https://paddleguru.com/races/CaliforniaRiverQuest2027
+  [skip: no small-craft class (OC1/OC2/V1/surfski)] 2027-06-01 SplashCo's 2027 Jailbreak Paddle Marathon | Rancho Cordova, CA | [] | https://paddleguru.com/races/SplashCos2027JailbreakPaddleMarathon
   [not CA] St. Mary's Paddlefest / 46555 Dennis Point Way, Drayden, MD 20630 / June 11 - June 13, 2027 / DETAILS COMING S
   [not CA] 45 North Solstice Paddle Festival 2027 / Sutton Park, Suttons Bay, MI 49682 / June 19 / Join us at Sutton Park
   [not CA] The Trojan! 2027 / Athens, NY / August 21 / Finishing in Athens, NY, Paddlers start in Henry Hudson Park, Selk
   [not CA] Lowcountry PaddleFest presented by OluKai 2027 / Fishing Cooperative Park, Squire Pope Rd, Hilton Head Island,
   [not CA] Thief Neck Island Paddle Quest 2027 / 1500 Pumphouse Rd, Rockwood, TN 37854, USA / September 25 / TNIPQ offers
   [skip: test listing] 2027-10-01 Payton test race 2027 | San Diego, CA | ['surfski'] | https://paddleguru.com/races/Paytontestrace2027
-  [skip: not CA, no OC/surfski class] 2027-10-02 2027 Great Alabama 650 | None | [] | https://paddleguru.com/races/2027GreatAlabama650
+  [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2027-10-02 2027 Great Alabama 650 | None | [] | https://paddleguru.com/races/2027GreatAlabama650

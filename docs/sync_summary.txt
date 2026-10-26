@@ -1,4 +1,16 @@
-Calendar: 0 added, 0 updated, 0 matched to existing events, 11 unchanged
-Calendar-only races for the sheet: 12
-Sheet cleanup: removed 4 blank or misplaced rows
-Sheet '2026-2027': 10 added, 13 refreshed (sorted by start date)
+  - 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026 (no OC1/OC2/V1/surfski class on PaddleGuru)
+Calendar: removed 1 OC6-only PaddleGuru races
+Calendar: 0 added, 0 updated, 0 matched to existing events, 10 unchanged
+Calendar-only races for the sheet: 3
+  - sheet row: 2027-09-11 Catalina Channel Crossing – US Outrigger Championships (no longer on the calendar)
+  - sheet row: 2027-08-21 Paopao Race (no longer on the calendar)
+  - sheet row: 2027-08-14 Whitey Harrison Race (no longer on the calendar)
+  - sheet row: 2027-06-26 Iron Champs (SCORA Iron Championships) (no longer on the calendar)
+  - sheet row: 2027-06-12 Ventura Outrigger Challenge (no longer on the calendar)
+  - sheet row: 2027-06-05 Kahanamoku Klassic (no longer on the calendar)
+  - sheet row: 2027-05-15 Rig Run (no longer on the calendar)
+  - sheet row: 2027-05-08 Battle of the Breakwater (no longer on the calendar)
+  - sheet row: 2027-05-01 Crystal Pier Race (no longer on the calendar)
+  - sheet row: 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026 (no longer on the calendar)
+Sheet: removed 10 rows for races no longer on the calendar
+Sheet '2026-2027': 0 added, 13 refreshed (sorted by start date)
