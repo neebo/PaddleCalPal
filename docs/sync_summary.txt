@@ -1,3 +1,4 @@
 Calendar: 0 added, 0 updated, 0 matched to existing events, 11 unchanged
 Calendar-only races for the sheet: 12
-Sheet '2026-2027': 3 added, 20 refreshed
+Sheet cleanup: removed 4 blank or misplaced rows
+Sheet '2026-2027': 10 added, 13 refreshed (sorted by start date)
