@@ -78,9 +78,53 @@ def sheet_values(race: dict, today: str) -> dict[str, str]:
         "Location": race.get("location") or "",
         "Race URL": race["url"],
         "Registration URL": race["url"] + "/register",
-        "Description": f"Classes: {classes_text(race)}",
+        "Description": race.get("notes") or f"Classes: {classes_text(race)}",
         "Updated On": today,
     }
+
+
+URL_PAT = re.compile(r"https?://[^\s<>\"')]+")
+
+
+def event_date(ev: dict) -> str | None:
+    st = ev.get("start", {})
+    return st.get("date") or (st.get("dateTime") or "")[:10] or None
+
+
+def calendar_only_races(events: list[dict]) -> list[dict]:
+    """Upcoming calendar events that didn't come from PaddleGuru (added by hand or by the
+    weekly Claude task), shaped like races.json entries so they can go into the sheet."""
+    out = []
+    for ev in events:
+        if ev.get("status") == "cancelled" or ev.get("extendedProperties", {}).get("private", {}).get(TAG):
+            continue
+        d = event_date(ev)
+        if not d or not ev.get("summary"):
+            continue
+        desc = ev.get("description") or ""
+        urls = [u.rstrip(".,") for u in URL_PAT.findall(desc)]
+        out.append({
+            "name": ev["summary"],
+            "date": d,
+            "location": ev.get("location") or "",
+            "url": urls[0] if urls else ev.get("htmlLink", ""),
+            "notes": re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", desc)).strip()[:300],
+            "source": "calendar",
+        })
+    return out
+
+
+def find_row(race: dict, rows: list[list[str]], col: dict[str, int]) -> int | None:
+    """Sheet row number (2-based) for this race: same Race URL, else same start date and name."""
+    def cell(r, h):
+        return r[col[h]] if h in col and len(r) > col[h] else ""
+    for n, r in enumerate(rows[1:], start=2):
+        if race["url"] and cell(r, "Race URL") == race["url"]:
+            return n
+    for n, r in enumerate(rows[1:], start=2):
+        if cell(r, "Start Date") == race["date"] and same_race(cell(r, "Title"), race["name"]):
+            return n
+    return None
 
 
 def plan_events(races: list[dict], existing: list[dict]) -> list[tuple[str, dict, dict | None]]:
@@ -128,13 +172,11 @@ def sync_sheet(creds, races: list[dict]) -> None:
     if "Race URL" not in col:
         raise SystemExit(f"Sheet '{ws.title}' has no 'Race URL' column; headers are {header}")
 
-    row_by_url = {r[col["Race URL"]]: n for n, r in enumerate(rows[1:], start=2)
-                  if len(r) > col["Race URL"] and r[col["Race URL"]]}
     today = datetime.now(TZ).date().isoformat()
     updates, appends = [], []
     for race in races:
         vals = sheet_values(race, today)
-        n = row_by_url.get(race["url"])
+        n = find_row(race, rows, col)
         if n:
             for h, v in vals.items():
                 if h in col:
@@ -145,6 +187,7 @@ def sync_sheet(creds, races: list[dict]) -> None:
                 if h in col:
                     row[col[h]] = v
             appends.append(row)
+            rows.append(row)  # so a duplicate later in this same run matches it
     if updates:
         ws.batch_update(updates, value_input_option="USER_ENTERED")
     if appends:
@@ -152,7 +195,7 @@ def sync_sheet(creds, races: list[dict]) -> None:
     print(f"Sheet '{ws.title}': {len(appends)} added, {len(races) - len(appends)} refreshed")
 
 
-def sync_calendar(creds, races: list[dict]) -> None:
+def sync_calendar(creds, races: list[dict]) -> list[dict]:
     from urllib.parse import quote
     from google.auth.transport.requests import AuthorizedSession
 
@@ -190,21 +233,32 @@ def sync_calendar(creds, races: list[dict]) -> None:
             print(f"  = {race['date']} {race['name']} (matched existing '{ev.get('summary')}')")
     print(f"Calendar: {counts['create']} added, {counts['update']} updated, "
           f"{counts['tag']} matched to existing events, {counts['ok']} unchanged")
+    after = s.get(base, params=params)
+    after.raise_for_status()
+    return after.json().get("items", [])
 
 
 def main() -> int:
     races = [r for r in json.loads(Path("docs/races.json").read_text())["races"] if r.get("date")]
     creds = credentials()
     errors = []
-    for name, fn in (("sheet", sync_sheet), ("calendar", sync_calendar)):
-        try:
-            fn(creds, races)
-        except SystemExit as e:
-            errors.append(f"{name}: {e}")
-            print(f"!! {name}: {e}")
-        except Exception as e:  # keep going so one failure doesn't block the other
-            errors.append(f"{name}: {e!r}")
-            print(f"!! {name}: {e!r}")
+
+    events: list[dict] = []
+    try:
+        events = sync_calendar(creds, races)
+    except (SystemExit, Exception) as e:  # keep going so the sheet still updates
+        errors.append(f"calendar: {e}")
+        print(f"!! calendar: {e}")
+
+    # The calendar is the master list: PaddleGuru races plus anything added there by hand
+    # or by the weekly Claude task all go into the sheet, one row per race.
+    others = calendar_only_races(events)
+    print(f"Calendar-only races for the sheet: {len(others)}")
+    try:
+        sync_sheet(creds, races + others)
+    except (SystemExit, Exception) as e:
+        errors.append(f"sheet: {e}")
+        print(f"!! sheet: {e}")
     return 1 if errors else 0
 
 
