@@ -77,13 +77,17 @@ def sheet_values(race: dict, today: str) -> dict[str, str]:
         "Title": race["name"],
         "Location": race.get("location") or "",
         "Race URL": race["url"],
-        "Registration URL": race["url"] + "/register",
+        "Registration URL": race["url"] + "/register" if is_paddleguru(race["url"]) else "",
         "Description": race.get("notes") or f"Classes: {classes_text(race)}",
         "Updated On": today,
     }
 
 
 URL_PAT = re.compile(r"https?://[^\s<>\"')]+")
+
+
+def is_paddleguru(url: str) -> bool:
+    return "paddleguru.com/races/" in (url or "")
 
 
 def event_date(ev: dict) -> str | None:
@@ -103,24 +107,33 @@ def calendar_only_races(events: list[dict]) -> list[dict]:
             continue
         desc = ev.get("description") or ""
         urls = [u.rstrip(".,") for u in URL_PAT.findall(desc)]
+        text = re.sub(r"<[^>]+>", " ", desc)
+        if urls and text.lstrip().startswith(urls[0]):
+            text = text.lstrip()[len(urls[0]):]  # the URL already has its own column
         out.append({
             "name": ev["summary"],
             "date": d,
             "location": ev.get("location") or "",
             "url": urls[0] if urls else ev.get("htmlLink", ""),
-            "notes": re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", desc)).strip()[:300],
+            "notes": re.sub(r"\s+", " ", text).strip()[:300],
             "source": "calendar",
         })
     return out
 
 
 def find_row(race: dict, rows: list[list[str]], col: dict[str, int]) -> int | None:
-    """Sheet row number (2-based) for this race: same Race URL, else same start date and name."""
+    """Sheet row number (2-based) for this race.
+
+    PaddleGuru links are unique per race, so they match on their own (even if the date
+    moved). Other links are often a shared schedule page (e.g. SCORA), so those races
+    match on start date plus name instead.
+    """
     def cell(r, h):
         return r[col[h]] if h in col and len(r) > col[h] else ""
-    for n, r in enumerate(rows[1:], start=2):
-        if race["url"] and cell(r, "Race URL") == race["url"]:
-            return n
+    if is_paddleguru(race["url"]):
+        for n, r in enumerate(rows[1:], start=2):
+            if cell(r, "Race URL") == race["url"]:
+                return n
     for n, r in enumerate(rows[1:], start=2):
         if cell(r, "Start Date") == race["date"] and same_race(cell(r, "Title"), race["name"]):
             return n
@@ -161,6 +174,21 @@ def credentials():
     return Credentials.from_service_account_info(json.loads(raw), scopes=SCOPES)
 
 
+def misplaced_rows(rows: list[list[str]], width: int) -> list[int]:
+    """Rows (1-based) that are blank within the header columns: empty spacer rows, or rows
+    whose data landed to the right of the table. Start Date and Title must both be empty."""
+    bad = []
+    for n, r in enumerate(rows[1:], start=2):
+        inside = [c.strip() for c in r[:width]]
+        outside = [c.strip() for c in r[width:]]
+        title_or_date = (inside[0] if inside else "") or (inside[2] if len(inside) > 2 else "")
+        if title_or_date:
+            continue
+        if any(outside) or not any(inside):
+            bad.append(n)
+    return bad
+
+
 def sync_sheet(creds, races: list[dict]) -> None:
     import gspread
     from gspread.utils import rowcol_to_a1
@@ -168,31 +196,53 @@ def sync_sheet(creds, races: list[dict]) -> None:
     ws = gspread.authorize(creds).open_by_key(SHEET_ID).sheet1
     rows = ws.get_all_values()
     header = rows[0] if rows else []
+    while header and not header[-1].strip():
+        header = header[:-1]
+    width = len(header)
     col = {h.strip(): i for i, h in enumerate(header) if h.strip()}
     if "Race URL" not in col:
         raise SystemExit(f"Sheet '{ws.title}' has no 'Race URL' column; headers are {header}")
 
+    # Clean up rows that ended up outside the table or blank in the middle of it.
+    widest = max((len(r) for r in rows), default=0)
+    if widest > width and any(c.strip() for r in rows[1:] for c in r[width:]):
+        ws.batch_clear([f"{rowcol_to_a1(2, width + 1)}:{rowcol_to_a1(len(rows), widest)}"])
+    bad = misplaced_rows(rows, width)
+    for n in reversed(bad):
+        ws.delete_rows(n)
+    if bad:
+        print(f"Sheet cleanup: removed {len(bad)} blank or misplaced rows")
+    rows = [r[:width] for r in ws.get_all_values()] if bad else [r[:width] for r in rows]
+
     today = datetime.now(TZ).date().isoformat()
-    updates, appends = [], []
+    updates, added, refreshed = [], 0, 0
+    next_row = len(rows) + 1
     for race in races:
         vals = sheet_values(race, today)
         n = find_row(race, rows, col)
         if n:
+            refreshed += 1
             for h, v in vals.items():
                 if h in col:
                     updates.append({"range": rowcol_to_a1(n, col[h] + 1), "values": [[v]]})
         else:
-            row = [""] * len(header)
+            added += 1
+            row = [""] * width
             for h, v in vals.items():
                 if h in col:
                     row[col[h]] = v
-            appends.append(row)
+            # Write at an exact position (columns A..) rather than "append", which can
+            # shift data sideways when the sheet has gaps.
+            updates.append({"range": f"{rowcol_to_a1(next_row, 1)}:{rowcol_to_a1(next_row, width)}",
+                            "values": [row]})
             rows.append(row)  # so a duplicate later in this same run matches it
+            next_row += 1
+    if next_row - 1 > ws.row_count:
+        ws.add_rows(next_row - 1 - ws.row_count)
     if updates:
         ws.batch_update(updates, value_input_option="USER_ENTERED")
-    if appends:
-        ws.append_rows(appends, value_input_option="USER_ENTERED")
-    print(f"Sheet '{ws.title}': {len(appends)} added, {len(races) - len(appends)} refreshed")
+    ws.sort((col["Start Date"] + 1, "asc"), range=f"A2:{rowcol_to_a1(len(rows), width)}")
+    print(f"Sheet '{ws.title}': {added} added, {refreshed} refreshed (sorted by start date)")
 
 
 def sync_calendar(creds, races: list[dict]) -> list[dict]:
