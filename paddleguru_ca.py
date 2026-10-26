@@ -38,6 +38,14 @@ DATE_PAT = re.compile(
     re.I,
 )
 RACE_HREF = re.compile(r"^/races/[^/?#]+/?$")
+TEST_PAT = re.compile(r"\btest\b|\bdemo\b|\bsample\b", re.I)
+
+SUMMARY: list[str] = []   # one line per race checked; committed as docs/run_summary.txt
+
+
+def log(line: str) -> None:
+    print(line)
+    SUMMARY.append(line)
 
 
 @dataclass
@@ -189,7 +197,7 @@ def scrape() -> list[Race]:
                 return out;
             }"""
         )
-        print(f"List page: {len(cards)} race links found")
+        log(f"List page: {len(cards)} race links found")
         if not cards:
             (DEBUG_DIR / "captured_json.json").write_text(json.dumps(captured, indent=1)[:5_000_000])
             browser.close()
@@ -202,6 +210,8 @@ def scrape() -> list[Race]:
             # Skip obvious non-California races early when the card shows a state.
             mentions_state = re.search(r",\s*[A-Z]{2}\b|California", card_text)
             if mentions_state and not is_california(card_text):
+                first = " / ".join(l.strip() for l in card_text.splitlines() if l.strip())[:110]
+                log(f"  [not CA] {first}")
                 continue
 
             url = ROOT + c["href"]
@@ -211,7 +221,7 @@ def scrape() -> list[Race]:
                     page.goto(url + suffix, wait_until="networkidle", timeout=45_000)
                     texts.append(page.inner_text("body"))
                 except Exception as e:
-                    print(f"  ! {url + suffix}: {e}")
+                    log(f"  ! {url + suffix}: {e}")
             full = "\n".join(texts)
 
             name = c["title"] or (page.title().split("|")[0].strip() if page else c["href"])
@@ -224,8 +234,14 @@ def scrape() -> list[Race]:
                 crafts=find_crafts(full),
                 california=is_california(card_text) or is_california(full),
             )
-            status = "KEEP" if (race.california and race.crafts and race.date) else "skip"
-            print(f"  [{status}] {race.date} {race.name} | {race.location} | {race.crafts}")
+            reasons = [r for r, bad in (
+                ("not CA", not race.california),
+                ("no OC/surfski class", not race.crafts),
+                ("no upcoming date", not race.date),
+                ("test listing", bool(TEST_PAT.search(race.name))),
+            ) if bad]
+            status = "KEEP" if not reasons else "skip: " + ", ".join(reasons)
+            log(f"  [{status}] {race.date} {race.name} | {race.location} | {race.crafts} | {url}")
             if status == "KEEP":
                 races.append(race)
 
@@ -246,6 +262,7 @@ def main() -> int:
     }
     (OUT_DIR / "races.json").write_text(json.dumps(payload, indent=2) + "\n")
     (OUT_DIR / "california-oc-surfski.ics").write_text(to_ics(races))
+    (OUT_DIR / "run_summary.txt").write_text("\n".join(SUMMARY) + "\n")
     print(f"Wrote {len(races)} races")
     return 0
 
