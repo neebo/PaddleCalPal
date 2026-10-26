@@ -1,5 +1,13 @@
-Sheet '2025': 11 added, 0 refreshed
-!! calendar: Can't reach the calendar. Share 'California Paddle Races' with the service account (pythonsheet@races-sheets.iam.gserviceaccount.com) using 'Make changes to events', and make sure the Google Calendar API is enabled in its Google Cloud project. (403: {
-  "error": {
-    "code": 403,
-    "message": "Google Calendar API has not been used in project 788427851095 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis)
+Sheet '2026-2027': 0 added, 11 refreshed
+  = 2026-11-14 Green Buoy Battle 2026 (matched existing 'Green Buoy Battle')
+  = 2026-11-15 Redwood Water Sports November Paddle Race 2026 (matched existing 'Redwood Water Sports Paddle Race #2 (2026/27 series)')
+  + 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026
+  = 2026-12-13 Redwood Water Sports December Paddle Race 2026 (matched existing 'Redwood Water Sports Paddle Race #3 (2026/27 series)')
+  = 2027-01-10 Redwood Water Sports January Paddle Race 2027 (matched existing 'Redwood Water Sports Paddle Race #4 (2026/27 series)')
+  + 2027-01-30 Hanohano Ocean Challenge 2027
+  = 2027-02-07 Redwood Water Sports February Paddle Race 2027 (matched existing 'Redwood Water Sports Paddle Race #5 (2026/27 series)')
+  = 2027-03-07 Redwood Water Sports March Paddle Race 2027 (matched existing 'Redwood Water Sports Paddle Race #6 – Corkscrew (2026/27 series)')
+  = 2027-04-18 Redwood Water Sports April Paddle Race 2027 (matched existing 'Redwood Water Sports Paddle Race #7 – Corkscrew (2026/27 series)')
+  + 2027-05-16 Redwood Water Sports May Paddle Race 2027
+  + 2027-05-30 California River Quest 2027
+Calendar: 4 added, 0 updated, 7 matched to existing events, 0 unchanged
