@@ -1,6 +1,6 @@
 {
   "source": "https://paddleguru.com/races?search=&sport=all",
-  "generated_at": "2026-10-26T20:50:25+00:00",
+  "generated_at": "2026-10-26T21:06:57+00:00",
   "filter": "California, upcoming, outrigger (OC/V1) or surfski classes",
   "races": [
     {
@@ -32,16 +32,6 @@
       "location": "Redding, CA",
       "crafts": [
         "outrigger",
-        "surfski"
-      ],
-      "california": true
-    },
-    {
-      "name": "Payton test race 2027",
-      "url": "https://paddleguru.com/races/Paytontestrace2027",
-      "date": "2027-10-07",
-      "location": "San Diego, CA",
-      "crafts": [
         "surfski"
       ],
       "california": true
