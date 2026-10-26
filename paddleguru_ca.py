@@ -27,10 +27,16 @@ OUT_DIR = Path("docs")
 DEBUG_DIR = Path("debug")
 
 CA_PAT = re.compile(r"\b(California|CA)\b(?!\w)")
-CRAFT_PAT = re.compile(
-    r"surf\s*-?\s*ski|outrigger|\bva['’]?a\b|\bOC\s*-?\s*[126]\b|\bV\s*-?\s*[16]\b",
-    re.I,
-)
+# Craft classes, most specific first. Only small craft count toward keeping a race;
+# a race that lists nothing but OC6/V6 (six-person team canoes) is dropped.
+CRAFT_PATS = [
+    ("surfski", re.compile(r"surf\s*-?\s*skis?\b|\bSS\s*-?\s*[12]\b|\b(?:single|double)\s+skis?\b", re.I)),
+    ("OC1", re.compile(r"\bOC\s*-?\s*1\b|\bone[\s-]*(?:man|person)\s+(?:outrigger|canoe)", re.I)),
+    ("OC2", re.compile(r"\bOC\s*-?\s*2\b|\btwo[\s-]*(?:man|person)\s+(?:outrigger|canoe)", re.I)),
+    ("V1", re.compile(r"\bV\s*-?\s*1\b", re.I)),
+    ("OC6", re.compile(r"\bOC\s*-?\s*6\b|\bV\s*-?\s*6\b|\bsix[\s-]*(?:man|person)\b", re.I)),
+]
+SMALL_CRAFT = {"surfski", "OC1", "OC2", "V1"}
 MONTH_NUM = {m: i for i, m in enumerate(
     ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
 # Month names must be capitalized ("May 5", not "may"); the year is optional because
@@ -43,6 +49,7 @@ DATE_PAT = re.compile(
 RACE_HREF = re.compile(r"^/races/[^/?#]+/?$")
 TEST_PAT = re.compile(r"\btest\b|\bdemo\b|\bsample\b", re.I)
 
+EXCLUDED: list[dict] = []  # CA races dropped for having no small-craft class
 SUMMARY: list[str] = []   # one line per race checked; committed as docs/run_summary.txt
 
 
@@ -103,14 +110,12 @@ def year_in(name: str) -> int | None:
 
 
 def find_crafts(text: str) -> list[str]:
-    labels = set()
-    for m in CRAFT_PAT.finditer(text):
-        t = m.group(0).lower().replace(" ", "").replace("-", "")
-        if "ski" in t:
-            labels.add("surfski")
-        else:
-            labels.add("outrigger")
-    return sorted(labels)
+    """Craft classes mentioned in the text, e.g. ['OC1', 'OC2', 'surfski']."""
+    return sorted(label for label, pat in CRAFT_PATS if pat.search(text))
+
+
+def has_small_craft(crafts: list[str]) -> bool:
+    return bool(SMALL_CRAFT & set(crafts))
 
 
 def find_location(text: str) -> str | None:
@@ -136,7 +141,7 @@ def to_ics(races: list[Race]) -> str:
         "VERSION:2.0",
         "PRODID:-//PaddleCalPal//PaddleGuru California OC+Surfski//EN",
         "CALSCALE:GREGORIAN",
-        "X-WR-CALNAME:PaddleGuru – California OC & Surfski",
+        "X-WR-CALNAME:PaddleGuru – California small craft (OC1/OC2/V1/surfski)",
         "X-WR-TIMEZONE:America/Los_Angeles",
     ]
     for r in races:
@@ -265,7 +270,7 @@ def scrape() -> list[Race]:
             )
             reasons = [r for r, bad in (
                 ("not CA", not race.california),
-                ("no OC/surfski class", not race.crafts),
+                ("no small-craft class (OC1/OC2/V1/surfski)", not has_small_craft(race.crafts)),
                 ("no upcoming date", not race.date),
                 ("test listing", bool(TEST_PAT.search(race.name))),
             ) if bad]
@@ -273,6 +278,9 @@ def scrape() -> list[Race]:
             log(f"  [{status}] {race.date} {race.name} | {race.location} | {race.crafts} | {url}")
             if status == "KEEP":
                 races.append(race)
+            elif race.california and race.date and not has_small_craft(race.crafts):
+                EXCLUDED.append({"name": race.name, "url": race.url, "date": race.date,
+                                 "crafts": race.crafts, "reason": "no small-craft class"})
 
         browser.close()
 
@@ -286,8 +294,10 @@ def main() -> int:
     payload = {
         "source": LIST_URL,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "filter": "California, upcoming, outrigger (OC/V1) or surfski classes",
+        "filter": "California, upcoming, small craft only: OC1, OC2, V1 or surfski (SS1/SS2) classes",
         "races": [asdict(r) for r in races],
+        # Lets the calendar/sheet sync remove events for races that turned out to be OC6-only.
+        "excluded": EXCLUDED,
     }
     (OUT_DIR / "races.json").write_text(json.dumps(payload, indent=2) + "\n")
     (OUT_DIR / "california-oc-surfski.ics").write_text(to_ics(races))

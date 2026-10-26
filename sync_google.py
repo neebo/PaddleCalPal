@@ -189,7 +189,20 @@ def misplaced_rows(rows: list[list[str]], width: int) -> list[int]:
     return bad
 
 
-def sync_sheet(creds, races: list[dict]) -> None:
+def stale_rows(races: list[dict], rows: list[list[str]], col: dict[str, int], today: str) -> list[int]:
+    """Upcoming rows this script wrote (they have 'Updated On') whose race is no longer on
+    the calendar or the PaddleGuru list, e.g. a race you deleted from the calendar."""
+    keep = {find_row(r, rows, col) for r in races}
+    out = []
+    for n, r in enumerate(rows[1:], start=2):
+        start = r[col["Start Date"]] if len(r) > col["Start Date"] else ""
+        stamped = "Updated On" in col and len(r) > col["Updated On"] and r[col["Updated On"]].strip()
+        if n not in keep and stamped and start >= today:
+            out.append(n)
+    return out
+
+
+def sync_sheet(creds, races: list[dict], prune: bool = False) -> None:
     import gspread
     from gspread.utils import rowcol_to_a1
 
@@ -241,11 +254,19 @@ def sync_sheet(creds, races: list[dict]) -> None:
         ws.add_rows(next_row - 1 - ws.row_count)
     if updates:
         ws.batch_update(updates, value_input_option="USER_ENTERED")
+    if prune:
+        gone = stale_rows(races, rows, col, today)
+        for n in reversed(gone):
+            print(f"  - sheet row: {rows[n - 1][col['Start Date']]} {rows[n - 1][col['Title']]} (no longer on the calendar)")
+            ws.delete_rows(n)
+            del rows[n - 1]
+        if gone:
+            print(f"Sheet: removed {len(gone)} rows for races no longer on the calendar")
     ws.sort((col["Start Date"] + 1, "asc"), range=f"A2:{rowcol_to_a1(len(rows), width)}")
     print(f"Sheet '{ws.title}': {added} added, {refreshed} refreshed (sorted by start date)")
 
 
-def sync_calendar(creds, races: list[dict]) -> list[dict]:
+def sync_calendar(creds, races: list[dict], excluded_urls: set[str] = frozenset()) -> list[dict]:
     from urllib.parse import quote
     from google.auth.transport.requests import AuthorizedSession
 
@@ -261,6 +282,18 @@ def sync_calendar(creds, races: list[dict]) -> list[dict]:
             f"Google Calendar API is enabled in its Google Cloud project. ({resp.status_code}: {resp.text[:200]})")
     resp.raise_for_status()
     existing = resp.json().get("items", [])
+
+    removed = 0
+    for ev in existing:
+        url = ev.get("extendedProperties", {}).get("private", {}).get(TAG)
+        if url and url in excluded_urls:
+            s.delete(f"{base}/{ev['id']}").raise_for_status()
+            removed += 1
+            print(f"  - {event_date(ev)} {ev.get('summary')} (no OC1/OC2/V1/surfski class on PaddleGuru)")
+    existing = [e for e in existing
+                if e.get("extendedProperties", {}).get("private", {}).get(TAG) not in excluded_urls]
+    if removed:
+        print(f"Calendar: removed {removed} OC6-only PaddleGuru races")
 
     counts = {"create": 0, "update": 0, "tag": 0, "ok": 0}
     for action, race, ev in plan_events(races, existing):
@@ -289,13 +322,17 @@ def sync_calendar(creds, races: list[dict]) -> list[dict]:
 
 
 def main() -> int:
-    races = [r for r in json.loads(Path("docs/races.json").read_text())["races"] if r.get("date")]
+    data = json.loads(Path("docs/races.json").read_text())
+    races = [r for r in data["races"] if r.get("date")]
+    excluded_urls = {x["url"] for x in data.get("excluded", [])}
     creds = credentials()
     errors = []
 
     events: list[dict] = []
+    calendar_ok = False
     try:
-        events = sync_calendar(creds, races)
+        events = sync_calendar(creds, races, excluded_urls)
+        calendar_ok = True
     except (SystemExit, Exception) as e:  # keep going so the sheet still updates
         errors.append(f"calendar: {e}")
         print(f"!! calendar: {e}")
@@ -305,7 +342,9 @@ def main() -> int:
     others = calendar_only_races(events)
     print(f"Calendar-only races for the sheet: {len(others)}")
     try:
-        sync_sheet(creds, races + others)
+        # Only prune sheet rows when we actually read the calendar; otherwise every
+        # calendar-only race would look "gone".
+        sync_sheet(creds, races + others, prune=calendar_ok)
     except (SystemExit, Exception) as e:
         errors.append(f"sheet: {e}")
         print(f"!! sheet: {e}")
