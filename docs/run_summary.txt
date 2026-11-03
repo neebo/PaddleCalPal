@@ -1,6 +1,5 @@
 List page: 33 race links found
   [skip: no small-craft class (OC1/OC2/V1/surfski)] 2026-12-31 SDCKT Team Membership October-December 2026 | San Diego, CA | [] | https://paddleguru.com/races/SDCKTTeamMembershipOctoberDecember2026
-  [not CA] The Bridges of Essex County 2026 / Pope's Landing Marina, Danvers, MA / November 1 / The Bridges of Essex Coun
   [skip: not CA] 2026-11-07 Tarzan Paddle Race 2026 | None | ['surfski'] | https://paddleguru.com/races/TarzanPaddleRace2026
   [not CA] NISH OUTRIGGER CHALLENGE MIAMI 2026 / 4020 Virginia Beach Dr, Miami, FL 33149 / November 07 - November 08, 202
   [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2026-11-07 Marina Park Fall Nationals Prone Paddleboard Race | None | [] | https://paddleguru.com/races/MarinaParkFallNationalsPronePaddleboardRace
@@ -10,6 +9,7 @@ List page: 33 race links found
   [not CA] Panama Jack Paddle Classic 2026 / Panama City, FL 32405, USA / November 21 / Please join us at St Andrews Stat
   [not CA] 52nd Annual FCPA Silver River Race / 9564 NE 28th Ln, Silver Springs, FL 34488, USA / December 5 / Come join t
   [skip: no small-craft class (OC1/OC2/V1/surfski)] 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026 | San Diego, CA | [] | https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026
+  [not CA] Chiberia Cold Water Classic 2026 / 2430 North Cannon Drive, Chicago, IL, USA / December 5 / Grab your Dry/Wets
   [KEEP] 2026-12-13 Redwood Water Sports December Paddle Race 2026 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsDecemberPaddleRace2026
   [KEEP] 2027-01-10 Redwood Water Sports January Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsJanuaryPaddleRace2027
   [KEEP] 2027-01-30 Hanohano Ocean Challenge 2027 | San Diego, CA | ['OC1', 'OC2', 'V1', 'surfski'] | https://paddleguru.com/races/HanohanoOceanChallenge2027
