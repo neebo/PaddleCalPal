@@ -1,12 +1,10 @@
 List page: 33 race links found
   [skip: no small-craft class (OC1/OC2/V1/surfski)] 2026-12-31 SDCKT Team Membership October-December 2026 | San Diego, CA | [] | https://paddleguru.com/races/SDCKTTeamMembershipOctoberDecember2026
-  [skip: not CA] 2026-11-07 Tarzan Paddle Race 2026 | None | ['surfski'] | https://paddleguru.com/races/TarzanPaddleRace2026
-  [not CA] NISH OUTRIGGER CHALLENGE MIAMI 2026 / 4020 Virginia Beach Dr, Miami, FL 33149 / November 07 - November 08, 202
-  [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2026-11-07 Marina Park Fall Nationals Prone Paddleboard Race | None | [] | https://paddleguru.com/races/MarinaParkFallNationalsPronePaddleboardRace
   [KEEP] 2026-11-14 Green Buoy Battle 2026 | Dana Point, CA | ['OC1', 'V1', 'surfski'] | https://paddleguru.com/races/GreenBuoyBattle2026
   [KEEP] 2026-11-15 Redwood Water Sports November Paddle Race 2026 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsNovemberPaddleRace2026
   [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2026-11-21 Crossing Adventure Series: Marco Island "Conquer the Rock" | None | [] | https://paddleguru.com/races/CrossingAdventureSeriesMarcoIslandConquertheRock
   [not CA] Panama Jack Paddle Classic 2026 / Panama City, FL 32405, USA / November 21 / Please join us at St Andrews Stat
+  [KEEP] 2026-11-28 Turkey Relay (River Town Racers) 2026 | Petaluma, CA | ['surfski'] | https://paddleguru.com/races/TurkeyRelayRiverTownRacers2026
   [not CA] 52nd Annual FCPA Silver River Race / 9564 NE 28th Ln, Silver Springs, FL 34488, USA / December 5 / Come join t
   [skip: no small-craft class (OC1/OC2/V1/surfski)] 2026-12-05 Becky Stuart Race , Oceanside, San Diego, California 2026 | San Diego, CA | [] | https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026
   [not CA] Chiberia Cold Water Classic 2026 / 2430 North Cannon Drive, Chicago, IL, USA / December 5 / Grab your Dry/Wets
@@ -18,7 +16,9 @@ List page: 33 race links found
   [not CA] Treasure Coast Paddle Battle 2027 / Fort Pierce, FL, USA / March 6 / This race features a 10k course, which st
   [KEEP] 2027-03-07 Redwood Water Sports March Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsMarchPaddleRace2027
   [skip: not CA, no small-craft class (OC1/OC2/V1/surfski)] 2027-03-07 Florida State Outrigger Regatta 2027 | None | ['OC6'] | https://paddleguru.com/races/FloridaStateOutriggerRegatta2027
+  [not CA] Black Belt Paddler Challenge 2027 / 3601 Rickenbacker Causeway, Key Biscayne, FL, USA / April 17 - April 18, 2
   [KEEP] 2027-04-18 Redwood Water Sports April Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsAprilPaddleRace2027
+  [not CA] Skyway Outrigger Challenge 2027 / Fort De Soto Park, St. Petersburg, FL, USA / April 24 - April 25, 2027 / Sun
   [skip: not CA] 2027-05-15 6th Annual Navarre Paddle Classic 2027 | None | ['OC2'] | https://paddleguru.com/races/6thAnnualNavarrePaddleClassic2027
   [not CA] Thief Neck Island Paddle Quest DUO 2027 / Rockwood Marina & RV Resort 1500 Pumphouse Rd Rockwood, TN 37854 / M
   [KEEP] 2027-05-16 Redwood Water Sports May Paddle Race 2027 | Redwood City, CA | ['surfski'] | https://paddleguru.com/races/RedwoodWaterSportsMayPaddleRace2027
