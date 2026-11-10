@@ -152,11 +152,12 @@ def plan_events(races: list[dict], existing: list[dict]) -> list[tuple[str, dict
         ev = by_tag.get(r["url"])
         if ev:
             # Only the date is kept in sync; titles/locations you edited are left alone.
-            moved = ev.get("start", {}).get("date") != r["date"]
+            # Compare by day so events you gave start/end times (dateTime) aren't "moved".
+            moved = event_date(ev) != r["date"]
             plan.append(("update" if moved else "ok", r, ev))
             continue
         twin = next((e for e in existing
-                     if e.get("start", {}).get("date") == r["date"]
+                     if event_date(e) == r["date"]
                      and same_race(e.get("summary", ""), r["name"])
                      and not e.get("extendedProperties", {}).get("private", {}).get(TAG)), None)
         plan.append(("tag", r, twin) if twin else ("create", r, None))
@@ -303,7 +304,11 @@ def sync_calendar(creds, races: list[dict], excluded_urls: set[str] = frozenset(
             print(f"  + {race['date']} {race['name']}")
         elif action == "update":
             body = event_body(race)
-            s.patch(f"{base}/{ev['id']}", json={"start": body["start"], "end": body["end"]}).raise_for_status()
+            # Null out dateTime/timeZone: PATCH merges, and a start with both date and
+            # dateTime is a 400 Bad Request.
+            allday = {"dateTime": None, "timeZone": None}
+            s.patch(f"{base}/{ev['id']}", json={"start": {**body["start"], **allday},
+                                                 "end": {**body["end"], **allday}}).raise_for_status()
             print(f"  ~ {race['date']} {race['name']} (date changed on PaddleGuru)")
         elif action == "tag":
             desc = ev.get("description") or ""
