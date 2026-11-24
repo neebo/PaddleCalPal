@@ -1,6 +1,6 @@
 {
   "source": "https://paddleguru.com/races?search=&sport=all",
-  "generated_at": "2026-11-17T01:54:08+00:00",
+  "generated_at": "2026-11-24T03:59:44+00:00",
   "filter": "California, upcoming, small craft only: OC1, OC2, V1 or surfski (SS1/SS2) classes",
   "races": [
     {
@@ -97,6 +97,18 @@
         "surfski"
       ],
       "california": true
+    },
+    {
+      "name": "Green Buoy Battle 2027",
+      "url": "https://paddleguru.com/races/GreenBuoyBattle2027",
+      "date": "2027-08-01",
+      "location": "Dana Point, CA",
+      "crafts": [
+        "OC1",
+        "V1",
+        "surfski"
+      ],
+      "california": true
     }
   ],
   "excluded": [
@@ -111,13 +123,6 @@
       "name": "Becky Stuart Race , Oceanside, San Diego, California 2026",
       "url": "https://paddleguru.com/races/BeckyStuartRaceOceansideSanDiegoCalifornia2026",
       "date": "2026-12-05",
-      "crafts": [],
-      "reason": "no small-craft class"
-    },
-    {
-      "name": "SplashCo's 2027 Jailbreak Paddle Marathon",
-      "url": "https://paddleguru.com/races/SplashCos2027JailbreakPaddleMarathon",
-      "date": "2027-06-01",
       "crafts": [],
       "reason": "no small-craft class"
     }
